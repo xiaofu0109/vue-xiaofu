@@ -145,7 +145,31 @@
       submitForm:function (forms) {
         this.$refs[forms].validate((valid) => {
           if(valid){
-            alert('submit');
+            const that = this;
+            alert(this.ruleForm.birthday);
+            this.$axios({
+              method:"post",
+              url:"http://localhost:8001/user/add",
+              params:{
+                usercode:that.ruleForm.usercode,
+                username:that.ruleForm.username,
+                userpassword:this.ruleForm.userpassword,
+                birthday:this.ruleForm.birthday,
+                gender:this.ruleForm.gender,
+                address:this.ruleForm.address,
+                phone:this.ruleForm.phone,
+                userrole:this.ruleForm.userrole
+              }
+            }).then(function (res) {
+              if(res.data.code == '200'){
+                alert(res.data.message);
+                that.$router.push("/home/users");
+              }else{
+                alert("添加失败！！！！");
+              }
+            }).catch(function (error) {
+              alert(error);
+            })
           }else{
             alert('error');
           }
