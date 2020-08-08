@@ -5,6 +5,7 @@ import home from '@/Views/home/home'
 import bill from '@/Views/bill/bill'
 import billupdate from '@/Views/bill/billUpdate'
 import users from '@/Views/user/users'
+import addusers from '@/Views/user/addUser'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
           path: '/home/users',
           name: 'users',
           component: users
+        },
+        {
+          path: '/home/addusers',
+          name: 'addusers',
+          component: addusers
         }
       ]
     },
@@ -51,6 +57,11 @@ export default new Router({
       path: '/users',
       name: 'users',
       component: users
+    },
+    {
+      path: '/addusers',
+      name: 'addusers',
+      component: addusers
     }
   ]
 })
