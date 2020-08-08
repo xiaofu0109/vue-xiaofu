@@ -29,4 +29,6 @@ public interface SmbmsUserMapper {
     int updateByPrimaryKey(SmbmsUser record);
 
     List<SmbmsUser> getList(SmbmsUser user);
+
+    int addUser(SmbmsUser user);
 }

@@ -349,4 +349,12 @@
         </if>
       </where>
   </select>
+
+  <insert id="addUser" parameterType="com.xiaofu.vuessmbms.pojo.SmbmsUser">
+    INSERT INTO
+    smbms_user(userCode,userName,userPassword,gender,birthday,phone,address,userRole,createdBy,creationDate)
+    VALUES
+    (#{usercode},#{username},#{userpassword},#{gender},
+    #{birthday},#{phone},#{address},#{userrole},#{createdby},#{creationdate})
+  </insert>
 </mapper>

@@ -1,6 +1,9 @@
 package com.xiaofu.vuessmbms.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -21,6 +24,7 @@ public class SmbmsUser implements Serializable {
     private Integer gender;
 
     @ApiModelProperty(value = "出生日期")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
     @ApiModelProperty(value = "手机")

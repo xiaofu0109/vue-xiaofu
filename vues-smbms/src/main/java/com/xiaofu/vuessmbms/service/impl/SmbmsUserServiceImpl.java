@@ -9,6 +9,7 @@ import com.xiaofu.vuessmbms.service.SmbmsUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -30,5 +31,12 @@ public class SmbmsUserServiceImpl implements SmbmsUserService {
         PageHelper.startPage(pageindex,pagesize);
         List<SmbmsUser> list = userMapper.getList(user);
         return new PageInfo<SmbmsUser>(list);
+    }
+
+    @Override
+    public int addUser(SmbmsUser user) {
+        user.setCreatedby(1L);
+        user.setCreationdate(new Date());
+        return userMapper.addUser(user);
     }
 }
