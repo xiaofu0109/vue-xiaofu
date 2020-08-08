@@ -40,4 +40,14 @@ public class SmbmsUserController {
         PageInfo<SmbmsUser> pageInfo = userService.getList(user,pageindex,pagesize);
         return new CommonResult<PageInfo>(pageInfo);
     }
+
+    @ApiOperation("添加用户信息接口")
+    @PostMapping("/add")
+    public CommonResult addUser(SmbmsUser user){
+        int result = userService.addUser(user);
+        if(result > 0){
+            return new CommonResult(200,"添加用户成功",null);
+        }
+        return new CommonResult(500,"添加用户失败",null);
+    }
 }
