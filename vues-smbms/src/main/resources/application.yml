@@ -1,0 +1,20 @@
+
+server:
+  port: 8001
+spring:
+  application:
+    name: vues-smbms
+  datasource:
+     driver-class-name: com.mysql.cj.jdbc.Driver
+     url: jdbc:mysql://localhost:3306/smbms?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+     username: root
+     password: ok
+
+mybatis:
+  type-aliases-package: com.xiaofu.vuessmbms.pojo
+  mapper-locations: classpath:com/xiaofu/vuessmbms/mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+pagehelper:
+  helper-dialect: mysql
