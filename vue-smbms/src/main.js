@@ -4,13 +4,15 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import elementui from 'element-ui'
-import axios from 'axios'
+import axios from './utils/request'
+import store from './store'
 import 'element-ui/lib/theme-chalk/index.css'
 import moment from 'moment'
 Vue.config.productionTip = false
 
 Vue.use(elementui)
 Vue.use(require('vue-moment'))
+
 Vue.prototype.moment=moment
 Vue.prototype.$axios=axios
 
@@ -22,6 +24,7 @@ Vue.filter('dateFormat',function (datestr,patten='YYYY-MM-DD HH:mm:ss') {
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

@@ -73,18 +73,18 @@
       return {
         bills: [''],
         billa: {
-          productname:'',
-          providerid:'',
-          ispayment:''
+          productname: '',
+          providerid: '',
+          ispayment: ''
         },
-        options:[''],
-        payments:[
-          {id:1,value:"已付款"},
-          {id:2,value:"未付款"}
+        options: [''],
+        payments: [
+          {id: 1, value: "已付款"},
+          {id: 2, value: "未付款"}
         ],
-        currentPage:1,
-        pageSize:5,
-        total:0
+        currentPage: 1,
+        pageSize: 5,
+        total: 0
       }
     },
     mounted() {
@@ -94,34 +94,24 @@
     methods: {
       getList: function () {
         const that = this;
-        this.$axios({
-          method: "post",
-          url: "http://localhost:8001/bill/getbillList",
-          params:{
-
-              productname: this.billa.productname,
-              providerid: this.billa.providerid,
-              ispayment:this.billa.ispayment,
-
-            pageindex:this.currentPage,
-            pagesize:this.pageSize
-          }
-        }).then(function (res) {
-          console.log(res);
-          if (res.status == "200") {
-            console.log(res);
-            that.bills = res.data.data.list;
-            that.total = res.data.data.total;
-            that.pageSize = res.data.data.pageSize;
-            that.currentPage = res.data.data.pageNum;
-          } else {
-            alert("查询失败");
-          }
-        }).catch(function (error) {
+        let result =
+          this.$axios.post("/bill/getbillList",{
+            productname: this.billa.productname,
+            providerid: this.billa.providerid,
+            ispayment: this.billa.ispayment,
+            pageindex: this.currentPage,
+            pagesize: this.pageSize
+          });
+        result.then((res) => {
+          that.bills = res.data.list;
+          that.total = res.data.total;
+          that.pageSize = res.data.pageSize;
+          that.currentPage = res.data.pageNum;
+        },(error)=>{
           alert(error);
         })
       },
-      isDateFormatter:function (row) {
+      isDateFormatter: function (row) {
         return this.moment(new Date(row.creationdate)).format("YYYY-MM-DD HH:mm:ss");
       },
       isPayFormatter: function (row) {
@@ -134,19 +124,17 @@
             break;
         }
       },
-      getProList:function () {
+      getProList: function () {
         const that = this;
 
-        this.$axios({
-          url:"http://localhost:8001/provider/getprolist",
-          method:"post"
-        }).then(function (res) {
-          that.options = res.data.data;
-        }).catch(function (error) {
+        let result = this.$axios.post("/provider/getprolist");
+        result.then((res) => {
+          that.options = res.data;
+        },(error)=>{
           alert(error);
         })
       },
-      selBill:function (row) {
+      selBill: function (row) {
         alert(row.ispayment);
       },
       handleSizeChange(val) {
@@ -160,16 +148,16 @@
         this.currentPage = val;
         this.getList();
       },
-      updatebill:function (row) {
+      updatebill: function (row) {
         console.log(row)
-        this.$router.push({path:'/home/update',query:{row:row}});
+        this.$router.push({path: '/home/update', query: {row: row}});
       }
     }
   }
 </script>
 
 <style>
-  .block{
+  .block {
     margin: 10px;
     text-align: right;
 

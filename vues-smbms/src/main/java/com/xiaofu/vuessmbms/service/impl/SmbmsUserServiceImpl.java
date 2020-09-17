@@ -39,4 +39,11 @@ public class SmbmsUserServiceImpl implements SmbmsUserService {
         user.setCreationdate(new Date());
         return userMapper.addUser(user);
     }
+
+    @Override
+    public int updateUser(SmbmsUser user) {
+        user.setModifyby(1L);
+        user.setModifydate(new Date());
+        return userMapper.updateUser(user);
+    }
 }

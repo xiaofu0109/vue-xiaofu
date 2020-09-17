@@ -9,9 +9,12 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.xiaofu.vuessmbms.utils.tokenUtils;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Api(tags = "SmbmsUserController",description = "用户信息表接口管理")
@@ -24,10 +27,14 @@ public class SmbmsUserController {
 
     @ApiOperation("登录接口管理")
     @PostMapping("/login")
-    public CommonResult getLogin(SmbmsUser user){
+    public CommonResult getLogin( SmbmsUser user){
+        System.out.println("用戶名:" + user.getUsercode());
         List<SmbmsUser> list = userService.getLogin(user);
         if(list != null){
-            return new CommonResult(200,"操作成功",null);
+            String token = tokenUtils.createToken(list.get(0));
+
+            System.out.println("token:---" + token);
+            return new CommonResult(200,"操作成功",token);
         }else{
             return new CommonResult(500,"操作失败",null);
         }
@@ -49,5 +56,18 @@ public class SmbmsUserController {
             return new CommonResult(200,"添加用户成功",null);
         }
         return new CommonResult(500,"添加用户失败",null);
+    }
+
+
+    @ApiOperation("修改用户信息接口")
+    @PostMapping("/update")
+    public CommonResult updateUser(SmbmsUser user){
+        System.out.println("出生日期：" + user.getBirthday());
+        int result = userService.updateUser(user);
+        if(result > 0){
+            return new CommonResult(200,"修改成功",null);
+        }
+        return new CommonResult(500,"修改失败",null);
+
     }
 }

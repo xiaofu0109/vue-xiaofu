@@ -38,7 +38,9 @@
             </div>
           </el-menu-item>
           <el-menu-item index="2-2">
-
+            <div @click="addUser">
+              <div>添加用户</div>
+            </div>
           </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
@@ -77,6 +79,9 @@
       },
       getUser:function () {
         this.$router.push("/home/users")
+      },
+      addUser:function () {
+        this.$router.push("/home/addusers")
       }
     }
   }

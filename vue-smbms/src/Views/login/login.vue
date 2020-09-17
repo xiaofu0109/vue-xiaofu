@@ -49,18 +49,20 @@
     methods: {
       doLogin: function () {
         const that = this;
-        this.$axios({
-          method: "post",
-          url: "http://localhost:8001/user/login",
-          params: {
-            usercode: that.user.username,
-            userpassword: that.user.password
+        let result = this.$axios.post("/user/login",
+          {usercode: that.user.username,
+            userpassword: that.user.password});
+
+        result.then((value) =>{
+          console.log("这是个什么东西 ！！！！");
+          console.log(value);
+          if(value.code == "200"){
+            alert(value.data);
+            that.$store.commit("changeLogin", {Authorization:value.data});
+            that.$router.push("/home")
           }
-        }).then(function (res) {
-          console.log(res);
-          if(res.data.code == "200"){
-           that.$router.push("/home")
-          }
+        },(error) =>{
+          alert(error);
         })
       }
     }

@@ -51,7 +51,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm('aa')">提交</el-button>
-          <el-button @click="resetForm('ruleForm')">重置</el-button>
+          <el-button @click="resetForm('aa')">重置</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -174,6 +174,9 @@
             alert('error');
           }
         })
+      },
+      resetForm:function (aa) {
+        this.$refs[aa].resetFields();
       }
     }
   }

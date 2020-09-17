@@ -357,4 +357,17 @@
     (#{usercode},#{username},#{userpassword},#{gender},
     #{birthday},#{phone},#{address},#{userrole},#{createdby},#{creationdate})
   </insert>
+
+  <update id="updateUser" parameterType="com.xiaofu.vuessmbms.pojo.SmbmsUser">
+    UPDATE smbms_user
+    SET userName=#{username},
+    gender=#{gender},
+    birthday=#{birthday},
+    phone=#{phone},
+    address=#{address},
+    userRole=#{userrole},
+    modifyby=#{modifyby},
+    modifyDate=#{modifydate}
+    WHERE id=#{id}
+  </update>
 </mapper>

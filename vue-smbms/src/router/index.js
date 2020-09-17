@@ -6,10 +6,11 @@ import bill from '@/Views/bill/bill'
 import billupdate from '@/Views/bill/billUpdate'
 import users from '@/Views/user/users'
 import addusers from '@/Views/user/addUser'
+import updateUser from '@/Views/user/updateUser'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -40,6 +41,11 @@ export default new Router({
           path: '/home/addusers',
           name: 'addusers',
           component: addusers
+        },
+        {
+          path: '/home/updateuser',
+          name: 'updateuser',
+          component: updateUser
         }
       ]
     },
@@ -62,6 +68,27 @@ export default new Router({
       path: '/addusers',
       name: 'addusers',
       component: addusers
+    },
+    {
+      path: '/updateuser',
+      name: 'updateuser',
+      component: updateUser
     }
   ]
-})
+}) ;
+
+router.beforeEach((to,from,next) => {
+  if(to.path === '/'){
+    next();
+  }else{
+    let token = localStorage.getItem('Authorization');
+
+    if(token === 'null' || token === ''){
+      next('/');
+    }else{
+      next();
+    }
+  }
+});
+
+export default router;

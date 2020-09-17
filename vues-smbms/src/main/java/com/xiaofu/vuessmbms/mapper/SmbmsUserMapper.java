@@ -31,4 +31,6 @@ public interface SmbmsUserMapper {
     List<SmbmsUser> getList(SmbmsUser user);
 
     int addUser(SmbmsUser user);
+
+    int updateUser(SmbmsUser user);
 }

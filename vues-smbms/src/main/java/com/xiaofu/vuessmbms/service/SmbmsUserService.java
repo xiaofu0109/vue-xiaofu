@@ -12,4 +12,6 @@ public interface SmbmsUserService {
     PageInfo<SmbmsUser> getList(SmbmsUser user, int pageindex, int pagesize);
 
     int addUser(SmbmsUser user);
+
+    int updateUser(SmbmsUser user);
 }

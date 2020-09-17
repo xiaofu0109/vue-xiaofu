@@ -25,6 +25,7 @@ public class SmbmsUser implements Serializable {
 
     @ApiModelProperty(value = "出生日期")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+08")
     private Date birthday;
 
     @ApiModelProperty(value = "手机")

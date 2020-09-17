@@ -36,7 +36,7 @@
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="100">
           <template slot-scope="scope">
-            <el-button type="text" size="small">查看</el-button>
+            <el-button type="text" v-on:click="updateUsers(scope.row)" size="small">修改</el-button>
             <el-button type="text" size="small">编辑</el-button>
           </template>
         </el-table-column>
@@ -133,6 +133,9 @@
             break;
 
         }
+      },
+      updateUsers:function (row) {
+        this.$router.push({path:"/home/updateuser",query:{row:row}});
       }
     }
   }
